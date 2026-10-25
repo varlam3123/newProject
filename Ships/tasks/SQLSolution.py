@@ -10,3 +10,16 @@ Classes.createOrReplaceTempView("Classes")
 Ships.createOrReplaceTempView("Ships")
 Outcomes.createOrReplaceTempView("Outcomes")
 Battles.createOrReplaceTempView("Battles")
+
+
+
+ex1 = spark.sql(""" SELECT Classes.class, name, country
+FROM Classes JOIN Ships ON Classes.class = Ships.class
+WHERE numGuns >= 10
+""")
+
+ex2 = spark.sql(""" select hd
+from PC 
+group by hd
+having count(*) >= 2
+""")
