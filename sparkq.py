@@ -1,10 +1,10 @@
 # import os
 # import sys
 #
-# # Передаем путь до текущего интерпретатора Python из .venv в окружение Spark
+#  # Передаем путь до текущего интерпретатора Python из .venv в окружение Spark
 # os.environ['PYSPARK_PYTHON'] = sys.executable
 # os.environ['PYSPARK_DRIVER_PYTHON'] = sys.executable
-#
+
 # from pyspark.sql import SparkSession
 # from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
 #
@@ -114,99 +114,117 @@
 
 
 # ----------------------------------SHIPS------------------------------------------------
-# classes_schema = StructType([
-#     StructField("class", StringType(), False),
-#     StructField("type", StringType(), True),
-#     StructField("country", StringType(), True),
-#     StructField("numGuns", IntegerType(), True),
-#     StructField("bore", DoubleType(), True),
-#     StructField("displacement", IntegerType(), True)
+# from pyspark.sql import SparkSession
+# from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, DateType
+# from datetime import datetime
+#
+# spark = SparkSession.builder.appName("SqlExDataGeneration").getOrCreate()
+#
+# classes_schema = StructType([ \
+#     StructField("class", StringType(), False), \
+#     StructField("type", StringType(), False), \
+#     StructField("country", StringType(), False), \
+#     StructField("numGuns", IntegerType(), True), \
+#     StructField("bore", DoubleType(), True), \
+#     StructField("displacement", IntegerType(), True) \
 # ])
 #
-# classes_data = [
-#     ("Bismarck", "bb", "Germany", 8, 15.0, 42000),
-#     ("Iowa", "bb", "USA", 9, 16.0, 46000),
-#     ("Kongo", "bc", "Japan", 8, 14.0, 32000),
-#     ("North Carolina", "bb", "USA", 9, 16.0, 37000),
-#     ("Renown", "bc", "Gt.Britain", 6, 15.0, 32000),
-#     ("Revenge", "bb", "Gt.Britain", 8, 15.0, 29000),
-#     ("Tennessee", "bb", "USA", 12, 14.0, 32000),
-#     ("Yamato", "bb", "Japan", 9, 18.0, 65000)
+# classes_data = [ \
+#     ("Bismarck", "bb", "Germany", 8, 15.0, 42000), \
+#     ("Iowa", "bb", "USA", 9, 16.0, 46000), \
+#     ("Kongo", "bc", "Japan", 8, 14.0, 32000), \
+#     ("North Carolina", "bb", "USA", 9, 16.0, 37000), \
+#     ("Renown", "bc", "Gt.Britain", 6, 15.0, 32000), \
+#     ("Revenge", "bb", "Gt.Britain", 8, 15.0, 29000), \
+#     ("Tennessee", "bb", "USA", 12, 14.0, 32000), \
+#     ("Yamato", "bb", "Japan", 9, 18.0, 65000) \
 # ]
 #
 # df_classes = spark.createDataFrame(data=classes_data, schema=classes_schema)
 #
 #
-# ships_schema = StructType([
-#     StructField("name", StringType(), False),
-#     StructField("class", StringType(), False),
-#     StructField("launched", IntegerType(), True)
+# ships_schema = StructType([ \
+#     StructField("name", StringType(), False), \
+#     StructField("class", StringType(), False), \
+#     StructField("launched", IntegerType(), True) \
 # ])
 #
-# ships_data = [
-#     ("California", "Tennessee", 1921),
-#     ("Haruna", "Kongo", 1915),
-#     ("Hiei", "Kongo", 1914),
-#     ("Iowa", "Iowa", 1943),
-#     ("Kirishima", "Kongo", 1915),
-#     ("Kongo", "Kongo", 1913),
-#     ("Missouri", "Iowa", 1944),
-#     ("Musashi", "Yamato", 1942),
-#     ("New Jersey", "Iowa", 1943),
-#     ("North Carolina", "North Carolina", 1941),
-#     ("Ramillies", "Revenge", 1917),
-#     ("Renown", "Renown", 1916),
-#     ("Repulse", "Renown", 1916),
-#     ("Resolution", "Revenge", 1916),
-#     ("Revenge", "Revenge", 1916),
-#     ("Royal Oak", "Revenge", 1916),
-#     ("Royal Sovereign", "Revenge", 1916),
-#     ("Tennessee", "Tennessee", 1920),
-#     ("Washington", "North Carolina", 1941),
-#     ("Wisconsin", "Iowa", 1944),
-#     ("Yamato", "Yamato", 1941)
+# ships_data = [ \
+#     ("California", "Tennessee", 1921), \
+#     ("Haruna", "Kongo", 1915), \
+#     ("Hiei", "Kongo", 1914), \
+#     ("Iowa", "Iowa", 1943), \
+#     ("Kirishima", "Kongo", 1915), \
+#     ("Kongo", "Kongo", 1913), \
+#     ("Missouri", "Iowa", 1944), \
+#     ("Musashi", "Yamato", 1942), \
+#     ("New Jersey", "Iowa", 1943), \
+#     ("North Carolina", "North Carolina", 1941), \
+#     ("Ramillies", "Revenge", 1917), \
+#     ("Renown", "Renown", 1916), \
+#     ("Repulse", "Renown", 1916), \
+#     ("Resolution", "Revenge", 1916), \
+#     ("Revenge", "Revenge", 1916), \
+#     ("Royal Oak", "Revenge", 1916), \
+#     ("Royal Sovereign", "Revenge", 1916), \
+#     ("Tennessee", "Tennessee", 1920), \
+#     ("Washington", "North Carolina", 1941), \
+#     ("Wisconsin", "Iowa", 1944), \
+#     ("Yamato", "Yamato", 1941) \
 # ]
 #
 # df_ships = spark.createDataFrame(data=ships_data, schema=ships_schema)
 #
-#
-# battles_schema = StructType([
-#     StructField("name", StringType(), False),
-#     StructField("date", DateType(), True)
+# battles_schema = StructType([ \
+#     StructField("name", StringType(), False), \
+#     StructField("date", DateType(), False) \
 # ])
 #
-# battles_data = [
-#     ("Guadalcanal", datetime.strptime("1942-11-15", "%Y-%m-%d").date()),
-#     ("North Atlantic", datetime.strptime("1941-05-25", "%Y-%m-%d").date()),
-#     ("North Cape", datetime.strptime("1943-12-26", "%Y-%m-%d").date()),
-#     ("Surigao Strait", datetime.strptime("1944-10-25", "%Y-%m-%d").date())
+# battles_data = [ \
+#     ("Guadalcanal", datetime.strptime("1942-11-15", "%Y-%m-%d").date()), \
+#     ("North Atlantic", datetime.strptime("1941-05-25", "%Y-%m-%d").date()), \
+#     ("North Cape", datetime.strptime("1943-12-26", "%Y-%m-%d").date()), \
+#     ("Surigao Strait", datetime.strptime("1944-10-25", "%Y-%m-%d").date()), \
+#     ("#Cuba62a", datetime.strptime("1962-10-20", "%Y-%m-%d").date()), \
+#     ("#Cuba62b", datetime.strptime("1962-10-25", "%Y-%m-%d").date()) \
 # ]
 #
 # df_battles = spark.createDataFrame(data=battles_data, schema=battles_schema)
 #
-#
-# outcomes_schema = StructType([
-#     StructField("ship", StringType(), False),
-#     StructField("battle", StringType(), True),
-#     StructField("result", StringType(), True)
+# outcomes_schema = StructType([ \
+#     StructField("ship", StringType(), False), \
+#     StructField("battle", StringType(), False), \
+#     StructField("result", StringType(), False) \
 # ])
 #
-# outcomes_data = [
-#     ("Bismarck", "North Atlantic", "sunk"),
-#     ("California", "Surigao Strait", "OK"),
-#     ("Duke of York", "North Cape", "OK"),
-#     ("Fuso", "Surigao Strait", "sunk"),
-#     ("Hood", "North Atlantic", "sunk"),
-#     ("King George V", "North Atlantic", "OK"),
-#     ("Kirishima", "Guadalcanal", "sunk"),
-#     ("Prince of Wales", "North Atlantic", "damaged"),
-#     ("Rodney", "North Atlantic", "OK"),
-#     ("Scharnhorst", "North Cape", "sunk"),
-#     ("South Dakota", "Guadalcanal", "damaged"),
-#     ("Tennessee", "Surigao Strait", "OK"),
-#     ("Washington", "Guadalcanal", "OK"),
-#     ("West Virginia", "Surigao Strait", "OK"),
-#     ("Yamashiro", "Surigao Strait", "sunk")
+# outcomes_data = [ \
+#     ("Bismarck", "North Atlantic", "sunk"), \
+#     ("California", "Surigao Strait", "OK"), \
+#     ("Duke of York", "North Cape", "OK"), \
+#     ("Fuso", "Surigao Strait", "sunk"), \
+#     ("Hood", "North Atlantic", "sunk"), \
+#     ("King George V", "North Atlantic", "OK"), \
+#     ("Kirishima", "Guadalcanal", "sunk"), \
+#     ("Prince of Wales", "North Atlantic", "damaged"), \
+#     ("Rodney", "North Atlantic", "OK"), \
+#     ("Scharnhorst", "North Cape", "sunk"), \
+#     ("South Dakota", "Guadalcanal", "damaged"), \
+#     ("Tennessee", "Surigao Strait", "OK"), \
+#     ("Washington", "Guadalcanal", "OK"), \
+#     ("West Virginia", "Surigao Strait", "OK"), \
+#     ("Yamashiro", "Surigao Strait", "sunk"), \
+#     ("California", "#Cuba62a", "damaged"), \
+#     ("Pennsylvania", "#Cuba62a", "OK"), \
+#     ("Tennessee", "#Cuba62b", "damaged"), \
+#     ("California", "#Cuba62b", "OK") \
 # ]
 #
 # df_outcomes = spark.createDataFrame(data=outcomes_data, schema=outcomes_schema)
+#
+
+# .join(df_ships.select(F.col('name'), F.col('class'), F.col('launched')),
+#               on=(F.col('ship') == df_ships.name) & (F.col('ship') == df_ships['class'])) \
+#         .join(df_classes.select(F.col('class'), F.col('displacement')),
+#           on=F.col('ship') == df_classes['class']) \
+#         .select(df_outcomes.ship, df_classes.displacement, df_ships.launched) \
+#         .distinct()
