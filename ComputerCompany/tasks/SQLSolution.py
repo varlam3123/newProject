@@ -240,3 +240,203 @@ group by maker
 having max(l.price) is not null or max(pc.price) is not null or max(pr.price) is not null
 """)
 
+
+
+# ----------------------------- WINDOW -----------------------------------
+
+
+
+def w1():
+    return spark.sql("""
+        SELECT 
+            maker, 
+            model, 
+            type, 
+            ROW_NUMBER() OVER ( 
+                PARTITION BY type 
+                ORDER BY model ASC 
+            ) as model_seq 
+        FROM Product 
+    """)
+
+
+
+def w2():
+    return spark.sql("""
+        SELECT 
+            p.maker, 
+            pc.model, 
+            pc.price, 
+            MAX(pc.price) OVER ( 
+                PARTITION BY p.maker 
+            ) as max_pc_price_by_maker 
+        FROM PC pc 
+        JOIN Product p ON pc.model = p.model 
+    """)
+
+
+
+def w3():
+    return spark.sql("""
+        SELECT 
+            model, 
+            price, 
+            LEAD(price) OVER ( 
+                ORDER BY price ASC, model ASC 
+            ) - price as diff_with_next 
+        FROM Laptop 
+    """)
+
+
+
+def w4():
+    return spark.sql("""
+        SELECT 
+            p.maker, 
+            l.model, 
+            l.price, 
+            DENSE_RANK() OVER ( 
+                PARTITION BY p.maker 
+                ORDER BY l.price DESC 
+            ) as laptop_price_rank 
+        FROM Laptop l 
+        JOIN Product p ON l.model = p.model 
+    """)
+
+
+
+def w5():
+    return spark.sql("""
+        SELECT 
+            model, 
+            price, 
+            AVG(price) OVER ( 
+                ORDER BY model ASC 
+                ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 
+            ) as moving_avg_price 
+        FROM Printer 
+    """)
+
+
+
+def w6():
+    return spark.sql("""
+        SELECT 
+            model, 
+            price, 
+            NTILE(4) OVER ( 
+                ORDER BY price ASC 
+            ) as price_quartile 
+        FROM PC 
+    """)
+
+
+
+def w7():
+    return spark.sql("""
+        WITH printer_avg AS ( 
+            SELECT 
+                p.maker, 
+                pr.model, 
+                pr.price, 
+                AVG(pr.price) OVER ( 
+                    PARTITION BY p.maker 
+                ) as avg_maker_printer_price 
+            FROM Printer pr 
+            JOIN Product p ON pr.model = p.model 
+            WHERE pr.color = 'y' 
+        ) 
+        SELECT 
+            maker, 
+            model, 
+            price, 
+            ((price - avg_maker_printer_price) / avg_maker_printer_price) * 100 as pct_deviation 
+        FROM printer_avg 
+    """)
+
+
+
+def w8():
+    return spark.sql("""
+        WITH laptop_neighbors AS ( 
+            SELECT 
+                model, 
+                ram, 
+                price, 
+                LAG(price) OVER ( 
+                    ORDER BY ram ASC, model ASC 
+                ) as prev_price, 
+                LEAD(price) OVER ( 
+                    ORDER BY ram ASC, model ASC 
+                ) as next_price 
+            FROM Laptop 
+        ) 
+        SELECT model, ram, price 
+        FROM laptop_neighbors 
+        WHERE (prev_price IS NULL OR price > prev_price) 
+          AND (next_price IS NULL OR price > next_price) 
+    """)
+
+
+
+def w9():
+    return spark.sql("""
+        WITH pc_trends AS ( 
+            SELECT 
+                p.maker, 
+                pc.model, 
+                pc.price, 
+                LAG(pc.price) OVER ( 
+                    PARTITION BY p.maker 
+                    ORDER BY pc.model ASC 
+                ) as prev_pc_price 
+            FROM PC pc 
+            JOIN Product p ON pc.model = p.model 
+        ) 
+        SELECT 
+            maker, 
+            model, 
+            price, 
+            CASE 
+                WHEN prev_pc_price IS NULL THEN 1 
+                WHEN price > prev_pc_price THEN 1 
+                ELSE 0 
+            END as is_price_growing 
+        FROM pc_trends 
+    """)
+
+
+
+def w10():
+    return spark.sql("""
+        WITH all_products AS ( 
+            SELECT p.maker, p.model, pc.price FROM PC pc JOIN Product p ON pc.model = p.model 
+            UNION ALL 
+            SELECT p.maker, p.model, l.price FROM Laptop l JOIN Product p ON l.model = p.model 
+            UNION ALL 
+            SELECT p.maker, p.model, pr.price FROM Printer pr JOIN Product p ON pr.model = p.model 
+        ), 
+        cumulative_products AS ( 
+            SELECT 
+                maker, 
+                model, 
+                price, 
+                SUM(price) OVER ( 
+                    PARTITION BY maker 
+                    ORDER BY price ASC, model ASC 
+                    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 
+                ) as running_total, 
+                SUM(price) OVER ( 
+                    PARTITION BY maker 
+                ) as total_maker_sum 
+            FROM all_products 
+        ) 
+        SELECT 
+            maker, 
+            model, 
+            price, 
+            running_total, 
+            (running_total / total_maker_sum) * 100 as cumulative_market_share_pct 
+        FROM cumulative_products 
+        ORDER BY maker, price ASC 
+    """)

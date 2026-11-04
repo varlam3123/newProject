@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d3f106ed-7c76-4739-b3a9-60699988b590" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ComputerCompany/tasks/SQLSolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/ComputerCompany/tasks/SQLSolution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ComputerCompany/tasks/SparkSolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/ComputerCompany/tasks/SparkSolution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ComputerCompany/tasks/compOfTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/ComputerCompany/tasks/compOfTable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ships/tasks/SQLSolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ships/tasks/SQLSolution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ships/tasks/SparkSolution.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ships/tasks/SparkSolution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ships/tasks/compOfTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ships/tasks/compOfTable.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000027708487" />
+      <entry key="S2" value="1.0135781149362069" />
+      <entry key="S5" value="1.3431111379705771" />
+      <entry key="S10" value="2.154592652251497" />
+      <entry key="S30" value="4.376928067954719" />
+      <entry key="S60" value="6.465810307916645" />
+      <entry key="M2" value="9.05857291580043" />
+      <entry key="M5" value="14.500523494544481" />
+      <entry key="M10" value="23.465564826055385" />
+      <entry key="M15" value="33.986649034627945" />
+      <entry key="M30" value="69.70230440359511" />
+      <entry key="H1" value="137.12928651189392" />
+      <entry key="H2" value="254.5162467976174" />
+      <entry key="H4" value="471.69301828776844" />
+      <entry key="D1" value="2453.2840757951944" />
+      <entry key="W1" value="7354.048860874506" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="4.199845899617494E-118" />
+      <entry key="S5" value="1.4162035046662044E-47" />
+      <entry key="S10" value="5.100309560521734E-24" />
+      <entry key="S30" value="2.9916035608596345E-8" />
+      <entry key="S60" value="3.0772363769909674E-4" />
+      <entry key="M2" value="0.03381705736160757" />
+      <entry key="M5" value="0.5945259326967907" />
+      <entry key="M10" value="1.6641810757715072" />
+      <entry key="M15" value="2.5515883045536683" />
+      <entry key="M30" value="4.967930765033772" />
+      <entry key="H1" value="10.185461133059102" />
+      <entry key="H2" value="21.618698840783928" />
+      <entry key="H4" value="42.769103771138084" />
+      <entry key="D1" value="222.56838239299898" />
+      <entry key="W1" value="619.6519308083193" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.7845840978967508" />
+      <entry key="MS500" value="0.9526380007989497" />
+      <entry key="S2" value="1.0014522703872237" />
+      <entry key="S5" value="1.337029886357669" />
+      <entry key="S10" value="2.1498708373959405" />
+      <entry key="S30" value="4.368718248691016" />
+      <entry key="S60" value="6.447973258548655" />
+      <entry key="M2" value="9.070236070431514" />
+      <entry key="M5" value="15.073296855845001" />
+      <entry key="M10" value="25.108706825721338" />
+      <entry key="M15" value="36.517116919024865" />
+      <entry key="M30" value="74.64867825638208" />
+      <entry key="H1" value="147.29377454383027" />
+      <entry key="H2" value="276.11473550226106" />
+      <entry key="H4" value="514.4421753686005" />
+      <entry key="D1" value="2675.830789970604" />
+      <entry key="W1" value="7973.691989506761" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3JwuyYoxcBsLDaKybz8nxTqnA4S" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.SQLSolution.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SparkSolition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SparkSolution.executor&quot;: &quot;Run&quot;,
+    &quot;Python.asd.executor&quot;: &quot;Run&quot;,
+    &quot;Python.compOfTable.executor&quot;: &quot;Run&quot;,
+    &quot;Python.file.executor&quot;: &quot;Run&quot;,
+    &quot;Python.iop.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.new.executor&quot;: &quot;Run&quot;,
+    &quot;Python.p.executor&quot;: &quot;Run&quot;,
+    &quot;Python.q.executor&quot;: &quot;Run&quot;,
+    &quot;Python.qqqqqqqqqqq.executor&quot;: &quot;Run&quot;,
+    &quot;Python.qwe.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runpy.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sparkq.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/MyProject&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.packages.toolwindow.project.migrated.to.right.top.v2&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Python.compOfTable">
+    <configuration name="SparkSolution" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="C:\MyProject\.venv" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ComputerCompany/tasks" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ComputerCompany/tasks/SparkSolution.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="compOfTable" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="C:\MyProject\.venv" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ComputerCompany/tasks" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ComputerCompany/tasks/compOfTable.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="mydir" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="mydir" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-73a66231627c-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.10968.92" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3f106ed-7c76-4739-b3a9-60699988b590" name="Changes" comment="" />
+      <created>1790584706535</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1790584706535</updated>
+      <workItem from="1790584707633" duration="7567000" />
+      <workItem from="1790599885324" duration="2174000" />
+      <workItem from="1790610966615" duration="3173000" />
+      <workItem from="1790678664220" duration="5298000" />
+      <workItem from="1791035342275" duration="26660000" />
+      <workItem from="1791132454591" duration="3343000" />
+      <workItem from="1791183098561" duration="19813000" />
+      <workItem from="1791227386751" duration="641000" />
+      <workItem from="1791273341565" duration="16000" />
+      <workItem from="1791273369677" duration="16130000" />
+      <workItem from="1791301210115" duration="1616000" />
+      <workItem from="1791304875301" duration="666000" />
+      <workItem from="1791305572279" duration="218000" />
+      <workItem from="1791305800975" duration="350000" />
+      <workItem from="1791306162777" duration="959000" />
+      <workItem from="1791307135106" duration="1508000" />
+      <workItem from="1791316364726" duration="2529000" />
+      <workItem from="1791361446351" duration="13683000" />
+      <workItem from="1791389112637" duration="7005000" />
+      <workItem from="1791441708884" duration="15012000" />
+      <workItem from="1791574028025" duration="3985000" />
+      <workItem from="1791616103370" duration="536000" />
+      <workItem from="1791664674095" duration="892000" />
+      <workItem from="1791729727524" duration="13941000" />
+      <workItem from="1791792190790" duration="11838000" />
+      <workItem from="1791830231284" duration="2139000" />
+      <workItem from="1791871651075" duration="9479000" />
+      <workItem from="1791983632399" duration="2588000" />
+      <workItem from="1792003629789" duration="7763000" />
+      <workItem from="1792043823877" duration="13254000" />
+      <workItem from="1792069639785" duration="1120000" />
+      <workItem from="1792097954086" duration="2577000" />
+      <workItem from="1792135778750" duration="8806000" />
+      <workItem from="1792157270334" duration="34000" />
+      <workItem from="1792157362628" duration="75000" />
+      <workItem from="1792158170541" duration="292000" />
+      <workItem from="1792159252834" duration="167000" />
+      <workItem from="1792159500482" duration="703000" />
+      <workItem from="1792160415274" duration="3649000" />
+      <workItem from="1792184036261" duration="374000" />
+      <workItem from="1792222277666" duration="10047000" />
+      <workItem from="1792243893455" duration="4254000" />
+      <workItem from="1792312464412" duration="5601000" />
+      <workItem from="1792354705433" duration="478000" />
+      <workItem from="1792358782574" duration="1581000" />
+      <workItem from="1792842499292" duration="4104000" />
+      <workItem from="1792915479919" duration="9146000" />
+      <workItem from="1792960350523" duration="635000" />
+      <workItem from="1792961895546" duration="13000" />
+      <workItem from="1792961920695" duration="1557000" />
+      <workItem from="1793002980053" duration="19064000" />
+      <workItem from="1793096050950" duration="4626000" />
+      <workItem from="1793112571529" duration="9234000" />
+      <workItem from="1793184561623" duration="10092000" />
+      <workItem from="1793261411935" duration="11773000" />
+      <workItem from="1793310512202" duration="2815000" />
+      <workItem from="1793355260577" duration="11261000" />
+      <workItem from="1793378719807" duration="10953000" />
+      <workItem from="1793428264997" duration="28915000" />
+      <workItem from="1793521083635" duration="32985000" />
+      <workItem from="1793610394724" duration="1502000" />
+      <workItem from="1793613229534" duration="13411000" />
+      <workItem from="1793697316938" duration="7221000" />
+      <workItem from="1793705560698" duration="5611000" />
+      <workItem from="1793789486734" duration="393000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/mydir$qqqqqqqqqqq.coverage" NAME="qqqqqqqqqqq Coverage Results" MODIFIED="1792064373803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyProject$SparkSolution.coverage" NAME="SparkSolution Coverage Results" MODIFIED="1793709342410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ComputerCompany/tasks" />
+    <SUITE FILE_PATH="coverage/mydir$p.coverage" NAME="p Coverage Results" MODIFIED="1790596608736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$runpy.coverage" NAME="runpy Coverage Results" MODIFIED="1791133470616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Programs/Python/Python314/Lib" />
+    <SUITE FILE_PATH="coverage/mydir$sparkq.coverage" NAME="sparkq Coverage Results" MODIFIED="1792154726177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$qwe.coverage" NAME="qwe Coverage Results" MODIFIED="1790586865752" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyProject$compOfTable.coverage" NAME="compOfTable Coverage Results" MODIFIED="1793709961037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ComputerCompany/tasks" />
+    <SUITE FILE_PATH="coverage/mydir$new.coverage" NAME="new Coverage Results" MODIFIED="1792097996930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$iop.coverage" NAME="iop Coverage Results" MODIFIED="1790596593614" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyProject$SparkSolition.coverage" NAME="SparkSolition Coverage Results" MODIFIED="1792224791166" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ComputerCompany/ex2" />
+    <SUITE FILE_PATH="coverage/MyProject$qqqqqqqqqqq.coverage" NAME="qqqqqqqqqqq Coverage Results" MODIFIED="1792244742472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$asd.coverage" NAME="asd Coverage Results" MODIFIED="1792159574034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyProject$file.coverage" NAME="file Coverage Results" MODIFIED="1792161638959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$main.coverage" NAME="main Coverage Results" MODIFIED="1791305037340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/mydir$q.coverage" NAME="q Coverage Results" MODIFIED="1792160023796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/extensions" />
+    <SUITE FILE_PATH="coverage/MyProject$sparkq.coverage" NAME="sparkq Coverage Results" MODIFIED="1793365036597" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyProject$SQLSolution.coverage" NAME="SQLSolution Coverage Results" MODIFIED="1793625574511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ships/tasks" />
+  </component>
+</project>

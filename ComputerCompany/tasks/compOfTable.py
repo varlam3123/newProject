@@ -4,5 +4,5 @@ import SparkSolution as spark
 
 
 
-print(comparator(spark.ex24(), sql.ex24()))
+print(comparator(spark.w6(), sql.w6()))
 

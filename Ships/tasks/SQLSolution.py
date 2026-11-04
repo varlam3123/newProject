@@ -342,3 +342,172 @@ from all_country ac left join ship_in_battle sib on ac.country = sib.country and
 group by ac.country, ac.battle
 having count(sib.ship) = 0
 """)
+
+
+# ----------------------------- WINDOW -----------------------------------
+
+
+def w1():
+    return spark.sql("""
+        SELECT 
+            name, 
+            class, 
+            launched, 
+            ROW_NUMBER() OVER ( 
+                PARTITION BY class 
+                ORDER BY launched ASC NULLS LAST, name ASC 
+            ) as ship_rank 
+        FROM ships 
+    """)
+
+def w2():
+    return spark.sql("""
+        SELECT 
+            name, 
+            class, 
+            launched, 
+            MIN(launched) OVER ( 
+                PARTITION BY class 
+            ) as oldest_launched_in_class 
+        FROM ships 
+    """)
+
+def w3():
+    return spark.sql("""
+        SELECT 
+            name, 
+            class, 
+            launched, 
+            launched - LAG(launched) OVER ( 
+                PARTITION BY class 
+                ORDER BY launched ASC NULLS LAST, name ASC 
+            ) as years_since_prev_launch 
+        FROM ships 
+    """)
+
+def w4():
+    return spark.sql("""
+        WITH ranked_battles AS ( 
+            SELECT 
+                o.ship, 
+                o.battle, 
+                o.result, 
+                ROW_NUMBER() OVER ( 
+                    PARTITION BY o.ship 
+                    ORDER BY b.date DESC 
+                ) as rn 
+            FROM outcomes o 
+            JOIN battles b ON o.battle = b.name 
+        ) 
+        SELECT ship, battle, result 
+        FROM ranked_battles 
+        WHERE rn = 1 
+    """)
+
+def w5():
+    return spark.sql("""
+        SELECT 
+            class, 
+            displacement, 
+            AVG(displacement) OVER ( 
+                ORDER BY class 
+                ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING 
+            ) as moving_avg_displacement 
+        FROM classes 
+        WHERE type = 'bb' 
+    """)
+
+def w6():
+    return spark.sql("""
+        SELECT 
+            class, 
+            country, 
+            numGuns, 
+            DENSE_RANK() OVER ( 
+                PARTITION BY country 
+                ORDER BY numGuns DESC NULLS LAST 
+            ) as country_gun_rank 
+        FROM classes 
+    """)
+
+def w7():
+    return spark.sql("""
+        SELECT 
+            class, 
+            country, 
+            displacement, 
+            (displacement / MAX(displacement) OVER ( 
+                PARTITION BY country 
+            )) * 100 as pct_of_country_max 
+        FROM classes 
+    """)
+
+def w8():
+    return spark.sql("""
+        WITH battle_history AS ( 
+            SELECT 
+                o.ship, 
+                o.battle, 
+                o.result as current_result, 
+                LAG(o.result) OVER ( 
+                    PARTITION BY o.ship 
+                    ORDER BY b.date ASC 
+                ) as prev_result, 
+                COUNT(*) OVER ( 
+                    PARTITION BY o.ship 
+                ) as total_battles 
+            FROM outcomes o 
+            JOIN battles b ON o.battle = b.name 
+        ) 
+        SELECT ship, battle, prev_result, current_result 
+        FROM battle_history 
+        WHERE total_battles > 1 
+        ORDER BY ship, battle 
+    """)
+
+def w9():
+    return spark.sql("""
+        WITH head_ships AS ( 
+            SELECT 
+                c.class, 
+                COALESCE(s.name, 'No Head Ship') as head_ship_name 
+            FROM classes c 
+            LEFT JOIN ships s ON c.class = s.name 
+        ) 
+        SELECT 
+            s.name, 
+            s.class, 
+            h.head_ship_name 
+        FROM ships s 
+        JOIN head_ships h ON s.class = h.class 
+    """)
+
+def w10():
+    return spark.sql("""
+        WITH battle_losses AS ( 
+            SELECT 
+                b.name as battle_name, 
+                b.date as battle_date, 
+                c.country, 
+                COUNT(CASE WHEN o.result = 'sunk' THEN 1 END) as losses_in_battle 
+            FROM battles b 
+            CROSS JOIN (SELECT DISTINCT country FROM classes) c 
+            LEFT JOIN outcomes o ON b.name = o.battle 
+            LEFT JOIN ships s ON o.ship = s.name 
+            LEFT JOIN classes cl ON COALESCE(s.class, o.ship) = cl.class AND cl.country = c.country 
+            GROUP BY b.name, b.date, c.country 
+        ) 
+        SELECT 
+            battle_name, 
+            battle_date, 
+            country, 
+            SUM(losses_in_battle) OVER ( 
+                PARTITION BY country 
+                ORDER BY battle_date ASC 
+                ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW 
+            ) as cumulative_sunk_ships 
+        FROM battle_losses 
+        ORDER BY battle_date, country 
+    """)
+
+w10().show()

@@ -163,11 +163,11 @@ def ex21():
 
 def ex22():
     table = df_product.select('maker').distinct().join(df_product.select('type').distinct(), how='cross')
-    types = table.join(df_product, on=['maker', 'type'], how='left') \
-        .groupBy(table.maker, table.type).agg(F.count('model').alias('cnt_type'))
-    als = table.join(df_product, on='maker',how='left') \
-        .groupBy(table.maker).count()
-    return types.join(als, on='maker', how='left').withColumn('res', F.col('cnt_type') / F.col('count') * 100)
+    return table.join(df_product, on=['maker', 'type'], how='left') \
+        .groupBy(table.maker, table.type).agg(F.count('model').alias('cnt_type')) \
+    .withColumn('allCnt', F.sum('cnt_type').over(Window.partitionBy('maker'))) \
+    .withColumn('res', F.round(F.col('cnt_type') / F.col('allCnt') * 100, 2)) \
+    .select(F.col('maker'), F.col('type'), F.col('res'))
 
 
 
@@ -193,3 +193,117 @@ def ex24():
         F.max('pr_price'),
     )
 
+
+# ----------------------------- WINDOW -----------------------------------
+
+# • Задача 1. Порядковый номер моделей внутри производителей
+# Пронумеруйте все модели в таблице Product внутри каждого типа продукции (type) по алфавиту (model).
+
+def w1():
+    windowSpec = Window.partitionBy('type').orderBy('model')
+    return df_product.withColumn('row_number', F.row_number().over(windowSpec))
+
+
+
+
+
+# • Задача 2. Самый дорогой ПК у производителя
+# Для каждого ПК выведите максимальную цену среди всех ПК того же производителя.
+
+def w2():
+    windowSpec = Window.partitionBy('maker')
+    return df_product.join(df_pc, on='model').withColumn('max_price', F.max('price').over(windowSpec)) \
+    .select(F.col('maker'), F.col('model'), F.col('price'), F.col('max_price'))
+
+
+
+# • Задача 3. Разница в цене со следующей моделью ноутбука
+# Отсортируйте ноутбуки по цене от дешевых к дорогим. Для каждого ноутбука посчитайте,
+# на сколько он дешевле следующего по стоимости ноутбука.
+
+def w3():
+    windowSpec = Window.orderBy('price')
+    return df_laptop.withColumn('diff', F.lead('price').over(windowSpec) - F.col('price')) \
+    .select(F.col('model'), F.col('price'), F.col('diff'))
+
+
+
+
+# • Задача 4. Позиция ноутбука в ценовом рейтинге компании
+# Для каждого ноутбука определите его ранг по цене внутри его производителя (от самого дорогого к дешевому).
+# Ранги не должны иметь пропусков, если цены одинаковые.
+
+def w4():
+    windowSpec = Window.partitionBy('maker').orderBy(F.col('price').desc())
+    return df_product.join(df_laptop, on='model').withColumn('ranks', F.dense_rank().over(windowSpec)) \
+    .select(F.col('maker'), F.col('model'), F.col('price'), F.col('ranks'))
+
+# • Задача 5. Средняя цена принтеров в скользящем окне
+# Отсортируйте все принтеры по номеру модели.
+# Рассчитайте скользящую среднюю цену для каждого принтера,
+# включая текущий, один предыдущий и один следующий принтер в списке.
+
+def w5():
+    windowSpec = Window.orderBy('model').rowsBetween(-1, 1)
+    return df_printer.withColumn('avg_price', F.avg('price').over(windowSpec)) \
+    .select('model', 'price', 'avg_price')
+
+
+# • Задача 6. Разделение моделей ПК на ценовые группы
+# Разбейте все доступные ПК на 4 равные по количеству элементов группы (квартили),
+# отсортировав их по цене от меньшей к большей.
+# Выведите номер группы для каждого ПК.
+
+def w6():
+    windowSpec = Window.orderBy('price')
+    return df_pc.withColumn('sort_price', F.ntile(4).over(windowSpec)) \
+    .select('model', 'price', 'sort_price')
+
+
+
+
+# • Задача 7. Отклонение стоимости цветного принтера от средней
+# Для каждого цветного принтера (color = 'y') найдите,
+# на сколько процентов его цена отличается от средней цены всех цветных принтеров этого же производителя.
+def w7():
+    windowSpec = Window.partitionBy('maker')
+    return df_printer.filter(F.col('color') == 'y').join(df_product, on='model') \
+    .withColumn('relprice', F.abs(F.col('price') - F.avg('price').over(windowSpec)) / F.avg('price').over(windowSpec) * 100.0) \
+        .select(F.col('maker'), F.col('model'), F.col('price'), F.col('relprice'))
+
+
+
+
+
+# • Задача 8. Выявление ценовых пиков среди ноутбуков
+# Выведите только те ноутбуки, цена которых строго выше, чем цена как у предыдущего,
+# так и у следующего ноутбука в таблице (если отсортировать все ноутбуки по объему памяти ram по возрастанию, а затем по model).
+
+def w8():
+    windowSpec = Window.orderBy('ram', 'model')
+    return df_laptop.withColumn('res', F.when((F.col('price') > F.lag('price').over(windowSpec))
+                                       & (F.col('price') > F.lead('price').over(windowSpec)),1).otherwise(0)) \
+    .filter(F.col('res') == 1).select('model', 'ram', 'price')
+
+
+
+
+# • Задача 9. Поиск производителей с непрерывным ростом цен на ПК
+# Для каждого производителя найдите модели ПК, цена которых идет строго по нарастающей по сравнению с хронологически
+# (по номеру модели) предыдущим ПК этого же производителя. Если цена упала или осталась прежней — выведите флаг 0, если выросла — 1
+# (для первой модели производителя выведите 1).
+
+def w9():
+    windowSpec = Window.partitionBy('maker').orderBy('model')
+    return df_product.join(df_pc, on='model').withColumn('diff', F.when(F.lag('price').over(windowSpec).isNull(), 1)
+                                                .when(F.col('price') > F.lag('price').over(windowSpec), 1).otherwise(0)) \
+    .select(F.col('maker'), F.col('model'), F.col('price'), F.col('diff'))
+
+
+
+
+
+# • Задача 10. Кумулятивная доля рынка по стоимости товаров
+# Объедините все устройства (ПК, ноутбуки, принтеры) в общую витрину с указанием производителя, модели и цены.
+# Рассчитайте нарастающим итогом (по увеличению цены) кумулятивную сумму стоимости всех товаров для каждого производителя,
+# а также долю (в процентах) этой кумулятивной суммы от общей стоимости всех товаров этого производителя.

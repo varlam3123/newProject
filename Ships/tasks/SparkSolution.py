@@ -207,3 +207,109 @@ def ex26():
         .groupBy(cAndb.country, cAndb.battle).agg(
         F.count('ship').alias('count')) \
         .filter(F.col('count') == 0).select(F.col('country'), F.col('battle'))
+
+# ----------------------------- WINDOW -----------------------------------
+# Задача 1. Порядковый номер кораблей.
+# Пронумеруйте все корабли в таблице ships внутри каждого класса по возрастанию года спуска на воду (launched).
+# Если год совпадает или равен null, сортируйте по имени корабля.
+
+def w1():
+    windowSpec = Window.partitionBy('class').orderBy(F.col('launched'), F.col('name'))
+    return df_ships.withColumn('ranks', F.row_number().over(windowSpec)) \
+
+
+# • Задача 2. Самый старый корабль в классе
+# Для каждого корабля выведите год спуска самого первого (раннего) корабля в его классе.
+
+def w2():
+    windowSpec = Window.partitionBy('class').orderBy(F.col('launched'))
+    return df_ships.withColumn('first_value', F.first_value('launched').over(windowSpec))
+
+
+# • Задача 3. Разница в годах спуска
+# Для каждого корабля найдите, на сколько лет позже он был спущен на воду по сравнению с предыдущим кораблем в том же классе.
+# • (сортировать по launched и name).
+
+def w3():
+    windowSpec = Window.partitionBy('class').orderBy(F.col('launched'), F.col('name'))
+    return df_ships.withColumn('difference', (F.col('launched') - F.lag(F.col('launched')).over(windowSpec)))
+
+# Задача 4. Последнее сражение для каждого корабля
+# Используя таблицу outcomes и даты из battles,
+# для каждого корабля выведите его последнее сражение по дате (включая те корабли, которые были там потоплены)
+
+def w4():
+    windowSpec = Window.partitionBy('ship').orderBy(F.col('date').desc())
+    return df_outcomes.join(df_battles, on=df_outcomes.battle == df_battles.name, how='left') \
+    .withColumn('last_fight', F.dense_rank().over(windowSpec)) \
+    .select(F.col('ship'), F.col('battle'), F.col('result')).filter(F.col('last_fight') == 1)
+
+# Задача 5. Скользящее среднее водоизмещения
+# Для каждого класса боевых кораблей (type = 'bb')
+# рассчитайте скользящее среднее водоизмещения (displacement) среди трех классов:
+# текущего, одного предыдущего и одного следующего (если сортировать классы по алфавиту)
+
+def w5():
+    windowSpec = Window.orderBy(F.col('class')).rowsBetween(-1, 1)
+    return df_classes.filter(F.col('type') == 'bb') \
+    .withColumn('moving_average', F.avg('displacement').over(windowSpec)) \
+    .select(F.col('class'), F.col('displacement'), F.col('moving_average'))
+
+
+# • Задача 6. Ранжирование стран по количеству пушек
+# Выведите список всех классов кораблей.
+# Добавьте столбец с рангом класса внутри его страны по количеству пушек (numGuns) от большего к меньшему.
+# Используйте функцию, которая не оставляет пропусков в рангах при одинаковом количестве пушек.
+
+def w6():
+    windowSpec = Window.partitionBy(F.col('country')).orderBy(F.col('numGuns').desc())
+    return df_classes.withColumn('ranks', F.dense_rank().over(windowSpec)) \
+    .select(F.col('class'), F.col('country'), F.col('numGuns'), F.col('ranks'))
+
+# Задача 7. Доля водоизмещения класса от максимума страны
+# Для каждого класса найдите, какую долю (в процентах)
+# составляет его водоизмещение от максимального водоизмещения среди всех классов этой же страны.
+
+def w7():
+    windowSpec = Window.partitionBy(F.col('country'))
+    return df_classes.withColumn('percOf', F.col('displacement') / F.max(F.col('displacement')).over(windowSpec) * 100.0) \
+    .select(F.col('class'), F.col('country'), F.col('displacement'), F.col('percOf'))
+
+# Задача 8. Выявление серий побед/участий кораблей
+# Для кораблей, участвовавших более чем в одном сражении,
+# выведите список битв, хронологически предыдущий результат корабля в ведении боевых действий и его текущий результат.
+
+def w8():
+    windowSpec = Window.partitionBy(F.col('ship')).orderBy(F.col('date'))
+    return df_outcomes.join(df_battles, on=df_battles.name == df_outcomes.battle) \
+    .join(df_outcomes.groupBy('ship').count().filter(F.col('count') >= 2), on='ship', how='leftsemi') \
+    .withColumn('lag_res', F.lag('result').over(windowSpec)) \
+    .withColumn('now_res', F.last_value('result').over(windowSpec)) \
+    .select(F.col('ship'), F.col('battle'), F.col('lag_res'), F.col('now_res'))
+
+
+
+# • Задача 9. Поиск "главных" кораблей без явной связи
+# По правилам sql-ex, головным считается корабль, чье имя совпадает с именем класса.
+# Используя окно, найдите для каждого корабля имя головного корабля его класса.
+# Если головной корабль вообще отсутствует в таблице ships (но класс существует в classes), выведите No Head Ship.
+
+def w9():
+    windowSped = Window.partitionBy(F.col('ship'))
+
+# Задача 10. Хронология живучести кораблей по странам
+# Постройте непрерывную хронологическую ленту всех сражений.
+# Для каждого сражения рассчитайте кумулятивное
+# (нарастающим итогом с начала времен до даты текущего сражения включительно) количество кораблей каждой страны,
+# которые к этому моменту уже были потоплены (sunk).
+
+def w10():
+    windowSpec = Window.orderBy(F.col('date'))
+    return df_battles.join(df_outcomes, on= df_outcomes.battle == df_battles.name) \
+    .withColumn('res', F.count('*').over(windowSpec)).orderBy(F.col('date')) \
+    .select(F.col('name'), F.col('date'), F.col('country'),F.col('res'))
+
+
+
+
+w8().show()
